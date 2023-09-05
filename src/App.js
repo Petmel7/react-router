@@ -1,13 +1,20 @@
 
-import './App.css';
-import React from 'react';
-import Container from './Components/Container/Container.js';
-import AppBar from './Components/AppBar/AppBar.js';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import CreateQuizPage from './pages/CreateQuizPage';
+import QuizzesPage from './pages/QuizzesPage';
+import SingleQuizPage from './pages/SingleQuizPage';
+import { AppLayout } from './AppLayout';
 
-export default function App() {
+export const App = () => {
   return (
-    <Container>
-      <AppBar />
-    </Container>
+    <Routes>
+      <Route path='/' element={<AppLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path='/create' element={<CreateQuizPage />}/>
+        <Route path='/quizzes' element={<QuizzesPage />}/>
+        <Route path='/quizzes/:quizId' element={<SingleQuizPage />}/>
+      </Route>
+    </Routes>
   );
 }
