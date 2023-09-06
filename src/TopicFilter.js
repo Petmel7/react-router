@@ -1,13 +1,13 @@
 import { useSearchParams } from "react-router-dom";
 
-export const TopicFilter = ({ value, onChange }) => {
+export const TopicFilter = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const topic = searchParams.get('topic') ?? '';
 
-    const changeTopicFilter = evt => {
+    const changeFilter = evt => {
         setSearchParams({
             topic: evt.target.value,
-            level: levelFilter,
+            level: searchParams.get('level'),
         })
     }
 
@@ -15,6 +15,6 @@ export const TopicFilter = ({ value, onChange }) => {
         <input
             type="text"
             value={topic}
-            onChange={changeTopicFilter} />
+            onChange={changeFilter} />
     )
 }

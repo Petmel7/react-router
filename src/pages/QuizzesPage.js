@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { TopicFilter } from '../TopicFilter';
 
 const QuizzesPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -19,15 +20,22 @@ const QuizzesPage = () => {
     //     })
     // }
 
-    const changeLevelFilter = newLevel => {
-        setSearchParams({
-            topic: topicFilter,
-            level: newLevel,
-        })
-    }
+    // const changeLevelFilter = newLevel => {
+    //     setSearchParams({
+    //         topic: topicFilter,
+    //         level: newLevel,
+    //     })
+    // }
 
     const deleteQuiz = async quizId => {
 
     }
+
+    return (
+        <div>
+            <TopicFilter />
+            <levelFilter />
+        </div>
+    )
 };
 
