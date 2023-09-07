@@ -1,3 +1,28 @@
+import Select from 'react-select';
+import styled from 'styled-components';
+
+const StyledSelect = styled(Select)`
+    // width 200 px
+`;
+
+const options = [
+    { value: 'all', label: 'All', },
+    { value: 'beginner', label: 'Beginner', },
+    { value: 'intermediate', label: 'Intermediate', },
+    { value: 'advanced', label: 'Advanced', },
+];
+
+export const LevelFilter = ({ value, onChange }) => {
+    const defaultOption = options.find(option => option.value === value);
+
+    return (
+        <StyledSelect
+            options={options}
+            value={defaultOption}
+            onChange={option => onChange(option)} /> // Було так onChange(option.value)
+    )
+}
+
 // import { useSearchParams } from "react-router-dom";
 
 // const options = [
@@ -27,28 +52,3 @@
 //             onChange={changeFilter} />
 //     )
 // }
-
-import Select from 'react-select';
-import styled from 'styled-components';
-
-const StyledSelect = styled(Select)`
-    // width 200 px
-`;
-
-const options = [
-    { value: 'all', label: 'All', },
-    { value: 'beginner', label: 'Beginner', },
-    { value: 'intermediate', label: 'Intermediate', },
-    { value: 'advanced', label: 'Advanced', },
-];
-
-export const levelFilter = ({ value, onChange }) => {
-    const defaultOption = options.find(optson => options.value === value);
-
-    return (
-        <StyledSelect
-            options={options}
-            value={defaultOption}
-            onChange={optson => onChange(optson.value)} />
-    )
-}

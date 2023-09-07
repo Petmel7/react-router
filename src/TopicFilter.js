@@ -1,3 +1,12 @@
+export const TopicFilter = ({ value, onChange }) => {
+    return (
+        <input
+            type="text"
+            value={value}
+            onChange={evt => onChange(evt.target.value)} />
+    )
+}
+
 // import { useSearchParams } from "react-router-dom";
 
 // export const TopicFilter = () => {
@@ -18,12 +27,3 @@
 //             onChange={changeFilter} />
 //     )
 // }
-
-export const TopicFilter = ({ value, onChange }) => {
-    return (
-        <input
-            type="text"
-            value={value}
-            onChange={evt => onChange(evt.target.value)} />
-    )
-}
