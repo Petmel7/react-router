@@ -14,12 +14,26 @@ const initialFilters = {
   level: 'all',
 }
 
+// const getInitialFilters = () => {
+//   const savedFilters = localStorage.getItem(localStorageKey);
+//   if (savedFilters !== null) {
+//     return JSON.parse(savedFilters);
+//   }
+// };
+
 const getInitialFilters = () => {
   const savedFilters = localStorage.getItem(localStorageKey);
   if (savedFilters !== null) {
-    return JSON.parse(savedFilters);
+    try {
+      return JSON.parse(savedFilters);
+    } catch (error) {
+      console.error('Помилка при розборі збережених фільтрів:', error);
+    }
   }
+  // Повертаємо значення за замовчуванням, якщо немає збережених фільтрів або сталася помилка при розборі JSON.
+  return initialFilters;
 };
+
 
 export const App = () => {
   const [quizItems, setQuizItems] = useState([]);
@@ -85,15 +99,26 @@ export const App = () => {
 }
 
 
+  // const getVisibleQuizItem = () => {
+  //   const lowerCaseTopic = filters.topic.toLowerCase();
+
+  //   return quizItems.filter(quiz => {
+  //     const hasTopic = quiz.topic.toLowerCase().includes(lowerCaseTopic);
+  //     const hasMatchingLevel = quiz.level === filters.level;
+  //     return filters.level === 'all' ? hasTopic : hasTopic && hasMatchingLevel;
+  //   });
+  // };
+
   const getVisibleQuizItem = () => {
-    const lowerCaseTopic = filters.topic.toLowerCase();
+    const lowerCaseTopic = (filters.topic ?? '').toLowerCase();
 
     return quizItems.filter(quiz => {
-      const hasTopic = quiz.topic.toLowerCase().includes(lowerCaseTopic);
-      const hasMatchingLevel = quiz.level === filters.level;
-      return filters.level === 'all' ? hasTopic : hasTopic && hasMatchingLevel;
+        const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
+        const hasMatchingLevel = quiz.level === filters.level;
+        return filters.level === 'all' ? hasTopic : hasTopic && hasMatchingLevel;
     });
-  };
+};
+
 
   const visibleQuizItem = getVisibleQuizItem();
 
@@ -115,7 +140,7 @@ export const App = () => {
         <div>LOADING...</div>
       ) : (
         <QuizList
-          item={visibleQuizItem}
+          items={visibleQuizItem}
           onDelete={deleteQuiz} />)}
     </Layout>
   )

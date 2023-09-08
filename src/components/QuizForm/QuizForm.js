@@ -47,7 +47,7 @@ export const QuizForm = ({ onAdd }) => {
                         <option value='intermediate'></option>
                         <option value='advanced'></option>
                     </StyledField>
-                    <StyledError name='level' component='div'/>
+                    <StyledError name='level'/>
                 </label>
             </StyledForm>
 
