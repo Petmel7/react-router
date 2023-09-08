@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from './GlobalStyle';
+import { App } from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const theme = {
+  colors: {
+    black: '#212121',
+    white: '#fff',
+    success: 'green',
+    warning: 'orange',
+    error: 'red',
+  }
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <ThemeProvider theme={theme}>
       <App />
-    </BrowserRouter>
+      <GlobalStyle />
+    </ThemeProvider>
   </React.StrictMode>
 );
-
-reportWebVitals();
+  

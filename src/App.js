@@ -1,19 +1,11 @@
-import { QuizList } from './components/QuizList';
-import { SearchBar } from './components/SearchBar';
+import { QuizList } from './components/QuizList/QuizList';
+import { SearchBar } from './components/SearchBar/SearchBar';
 import { Layout } from './Layout';
-import { QuizForm } from './components/QuizForm';
+import { QuizForm } from './components/QuizForm/QuizForm';
 import { LevelFilter } from './LevelFilter';
 import { TopicFilter } from './TopicFilter';
-import { createQuiz, deleteQuizApi, fetchQuizzes } from 'api';
+import { createQuizApi, deleteQuizApi, fetchQuizzes } from './Api';
 import { useEffect, useState } from 'react';
-
-// import QuizList from './components/QuizList';
-// import SearchBar from './components/SearchBar';
-// import { Layout } from './Layout';
-// import QuizForm from './components/QuizForm';
-// import LevelFilter from './LevelFilter'; // Замість levelFilter
-// import TopicFilter from './TopicFilter';
-
 
 const localStorageKey = 'quiz-filters';
 
@@ -75,23 +67,12 @@ export const App = () => {
 
   const addQuiz = async newQuiz => {
     try {
-      const createdQuiz = await createQuiz(newQuiz);
+      const createdQuiz = await createQuizApi(newQuiz);
       setQuizItems(prevState => [...prevState, createdQuiz]);
     } catch (error) {
       console.log(error)
     }
   }
-
-  // const deleteQuiz = async quizId => {
-  //   try {
-  //     const deletedQuiz = await deleteQuiz(quizId);
-  //     setQuizItems(prevState => {
-  //       prevState.filter(quiz => quiz.id !== deletedQuiz.id)
-  //     })
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
   const deleteQuiz = async quizId => {
   try {
