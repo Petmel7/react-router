@@ -40,7 +40,7 @@ export const QuizCard = ({ item: { id, topic, level, time, questions }, onDelete
                 style={customStyles}>
 
                 <h1>{topic}</h1>
-                <buton onClick={() => setIsModalOpen(false)}>Close</buton>
+                <button onClick={() => setIsModalOpen(false)}>Close</button>
             </Modal>
         </Wrapper>
     )

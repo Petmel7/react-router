@@ -3,9 +3,10 @@ import * as Yup from 'yup';
 import { StyledForm, StyledField, StyledError } from './QuizForm.styled';
 
 const schema = Yup.object().shape({
-    topic: Yup.string().min(1, 'Toe Short!').required('Required'),
+    topic: Yup.string()
+        .min(1, 'Too Short!')
+        .required('Required'),
     level: Yup.string()
-
         .oneOf(['beginner', 'intermediate', 'advanced'])
         .required('Required'),
     time: Yup.number()
@@ -29,6 +30,7 @@ export const QuizForm = ({ onAdd }) => {
             }}
             validationSchema={schema}
             onSubmit={(values, actions) => {
+                // console.log(values, actions)
                 onAdd(values)
                 actions.resetForm();
             }}
@@ -41,14 +43,27 @@ export const QuizForm = ({ onAdd }) => {
                 </label>
 
                 <label>
-                    level
+                    Level
                     <StyledField as='select' name='level'>
-                        <option value='beginner'></option>
-                        <option value='intermediate'></option>
-                        <option value='advanced'></option>
+                        <option value='beginner'>Beginner</option>
+                        <option value='intermediate'>Intermediate</option>
+                        <option value='advanced'>Advanced</option>
                     </StyledField>
                     <StyledError name='level'/>
                 </label>
+
+                <label>
+                    Time
+                    <StyledField name="time" type="number"/>
+                </label>
+
+                <label>
+                    Questions
+                    <StyledField name="questions" type="number"/>
+                </label>
+
+                <button type="submit">Submit</button>
+
             </StyledForm>
 
         </Formik>

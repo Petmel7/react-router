@@ -39,6 +39,7 @@ export const App = () => {
   const [quizItems, setQuizItems] = useState([]);
 
   const [filters, setFilters] = useState(getInitialFilters);
+  // console.log(filters)
 
   const [loading, setLoading] = useState(false);
 
@@ -70,16 +71,18 @@ export const App = () => {
       ...prevState,
       topic: newTopic,
     }));
+    console.log(newTopic)
   };
 
   const changeLevelFilter = newLevel => {
     setFilters(prevState => ({
       ...prevState,
-      topic: newLevel,
+      level: newLevel,
     }));
   };
 
   const addQuiz = async newQuiz => {
+    // console.log(newQuiz)
     try {
       const createdQuiz = await createQuizApi(newQuiz);
       setQuizItems(prevState => [...prevState, createdQuiz]);
@@ -134,14 +137,14 @@ export const App = () => {
           onChange={changeLevelFilter} />
       </SearchBar>
 
-      <QuizForm />
+      <QuizForm onAdd={addQuiz}/>
 
       {loading ? (
         <div>LOADING...</div>
       ) : (
         <QuizList
-          items={visibleQuizItem}
-          onDelete={deleteQuiz} />)}
+            items={visibleQuizItem}
+            onDelete={deleteQuiz} />)}
     </Layout>
   )
 }

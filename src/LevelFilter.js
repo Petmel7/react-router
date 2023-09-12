@@ -2,7 +2,7 @@ import Select from 'react-select';
 import styled from 'styled-components';
 
 const StyledSelect = styled(Select)`
-    // width 200 px
+    width 300 px;
 `;
 
 const options = [
