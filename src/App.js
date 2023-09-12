@@ -14,13 +14,6 @@ const initialFilters = {
   level: 'all',
 }
 
-// const getInitialFilters = () => {
-//   const savedFilters = localStorage.getItem(localStorageKey);
-//   if (savedFilters !== null) {
-//     return JSON.parse(savedFilters);
-//   }
-// };
-
 const getInitialFilters = () => {
   const savedFilters = localStorage.getItem(localStorageKey);
   if (savedFilters !== null) {
@@ -91,6 +84,32 @@ export const App = () => {
     }
   }
 
+//   const addQuiz = async newQuiz => {
+//     try {
+//         // Отримайте результат створення квіза
+//         const createdQuiz = await createQuizApi(newQuiz);
+//         // Перевірте, чи є відповідь від серверу та чи є ID у створеного квіза
+//         if (createdQuiz && createdQuiz.id) {
+//             setQuizItems(prevState => [...prevState, createdQuiz]);
+//         } else {
+//             console.error('Помилка під час створення квіза: невірна відповідь від серверу.');
+//         }
+//     } catch (error) {
+//         console.error('Помилка при створенні квіза:', error);
+//     }
+// }
+
+
+//   const deleteQuiz = async quizId => {
+//   try {
+//     const deletedQuiz = await deleteQuizApi(quizId);
+//     setQuizItems(prevState =>
+//       prevState.filter(quiz => quiz.id !== deletedQuiz.id));
+//   } catch (error) {
+//     console.log(error)
+//   }
+  // }
+  
   const deleteQuiz = async quizId => {
   try {
     const deletedQuiz = await deleteQuizApi(quizId);
@@ -102,24 +121,24 @@ export const App = () => {
 }
 
 
-  // const getVisibleQuizItem = () => {
-  //   const lowerCaseTopic = filters.topic.toLowerCase();
+//   const getVisibleQuizItem = () => {
+//     const lowerCaseTopic = (filters.topic ?? '').toLowerCase();
 
-  //   return quizItems.filter(quiz => {
-  //     const hasTopic = quiz.topic.toLowerCase().includes(lowerCaseTopic);
-  //     const hasMatchingLevel = quiz.level === filters.level;
-  //     return filters.level === 'all' ? hasTopic : hasTopic && hasMatchingLevel;
-  //   });
+//     return quizItems.filter(quiz => {
+//         const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
+//         const hasMatchingLevel = quiz.level === filters.level;
+//         return filters.level === 'all' ? hasTopic : hasTopic && hasMatchingLevel;
+//     });
   // };
 
   const getVisibleQuizItem = () => {
-    const lowerCaseTopic = (filters.topic ?? '').toLowerCase();
+  const lowerCaseTopic = (filters.topic ?? '').toLowerCase();
 
-    return quizItems.filter(quiz => {
-        const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
-        const hasMatchingLevel = quiz.level === filters.level;
-        return filters.level === 'all' ? hasTopic : hasTopic && hasMatchingLevel;
-    });
+  return quizItems.filter(quiz => {
+    const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
+    const hasMatchingLevel = filters.level === 'all' || quiz.level === filters.level;
+    return hasTopic && hasMatchingLevel;
+  });
 };
 
 
