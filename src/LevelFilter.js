@@ -2,7 +2,7 @@ import Select from 'react-select';
 import styled from 'styled-components';
 
 const StyledSelect = styled(Select)`
-    width 300 px;
+    width: 250px;
 `;
 
 const options = [
@@ -19,7 +19,7 @@ export const LevelFilter = ({ value, onChange }) => {
         <StyledSelect
             options={options}
             value={defaultOption}
-            onChange={option => onChange(option)} /> // Було так onChange(option.value)
+            onChange={option => onChange(option.value)} /> 
     )
 }
 

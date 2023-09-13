@@ -1,105 +1,126 @@
-import { QuizList } from './components/QuizList/QuizList';
-import { SearchBar } from './components/SearchBar/SearchBar';
-import { Layout } from './Layout';
-import { QuizForm } from './components/QuizForm/QuizForm';
-import { LevelFilter } from './LevelFilter';
-import { TopicFilter } from './TopicFilter';
-import { createQuizApi, deleteQuizApi, fetchQuizzes } from './Api';
-import { useEffect, useState } from 'react';
+// import { QuizList } from './components/QuizList/QuizList';
+// import { SearchBar } from './components/SearchBar/SearchBar';
+// import { Layout } from './Layout';
+// import { QuizForm } from './components/QuizForm/QuizForm';
+// import { LevelFilter } from './LevelFilter';
+// import { TopicFilter } from './TopicFilter';
+// import { createQuizApi, deleteQuizApi, fetchQuizzes } from './Api';
+// import { useEffect, useState } from 'react';
 
-const localStorageKey = 'quiz-filters';
+// const localStorageKey = 'quiz-filters';
 
-const initialFilters = {
-  topic: '',
-  level: 'all',
-}
+// const initialFilters = {
+//   topic: '',
+//   level: 'all',
+// }
 
-const getInitialFilters = () => {
-  const savedFilters = localStorage.getItem(localStorageKey);
-  if (savedFilters !== null) {
-    try {
-      return JSON.parse(savedFilters);
-    } catch (error) {
-      console.error('Помилка при розборі збережених фільтрів:', error);
-    }
-  }
-  // Повертаємо значення за замовчуванням, якщо немає збережених фільтрів або сталася помилка при розборі JSON.
-  return initialFilters;
-};
+// const getInitialFilters = () => {
+//   const savedFilters = localStorage.getItem(localStorageKey);
+//   if (savedFilters !== null) {
+//     try {
+//       return JSON.parse(savedFilters);
+//     } catch (error) {
+//       console.error('Помилка при розборі збережених фільтрів:', error);
+//     }
+//   }
+//   // Повертаємо значення за замовчуванням, якщо немає збережених фільтрів або сталася помилка при розборі JSON.
+//   return initialFilters;
+// };
 
 
-export const App = () => {
-  const [quizItems, setQuizItems] = useState([]);
+// export const App = () => {
+//   const [quizItems, setQuizItems] = useState([]);
 
-  const [filters, setFilters] = useState(getInitialFilters);
-  // console.log(filters)
+//   const [filters, setFilters] = useState(getInitialFilters);
+//   // console.log(filters)
 
-  const [loading, setLoading] = useState(false);
+//   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function getQuizzes() {
-      try {
-        setLoading(true);
-        const quizItems = await fetchQuizzes();
-        setQuizItems(quizItems)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    getQuizzes();
-  }, []);
+//   useEffect(() => {
+//     async function getQuizzes() {
+//       try {
+//         setLoading(true);
+//         const quizItems = await fetchQuizzes();
+//         setQuizItems(quizItems)
+//       } catch (error) {
+//         console.log(error)
+//       } finally {
+//         setLoading(false)
+//       }
+//     }
+//     getQuizzes();
+//   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(filters));
-  }, [filters]);
+//   useEffect(() => {
+//     localStorage.setItem(localStorageKey, JSON.stringify(filters));
+//   }, [filters]);
 
-  const resetFilters = () => {
-    setFilters(initialFilters);
-  };
+//   const resetFilters = () => {
+//     setFilters(initialFilters);
+//   };
 
-  const changeTopicFilter = newTopic => {
-    setFilters(prevState => ({
-      ...prevState,
-      topic: newTopic,
-    }));
-    console.log(newTopic)
-  };
+//   const changeTopicFilter = newTopic => {
+//     setFilters(prevState => ({
+//       ...prevState,
+//       topic: newTopic,
+//     }));
+//     console.log(newTopic)
+//   };
 
-  const changeLevelFilter = newLevel => {
-    setFilters(prevState => ({
-      ...prevState,
-      level: newLevel,
-    }));
-  };
+//   const changeLevelFilter = newLevel => {
+//     setFilters(prevState => ({
+//       ...prevState,
+//       level: newLevel,
+//     }));
+//   };
 
-  const addQuiz = async newQuiz => {
-    // console.log(newQuiz)
-    try {
-      const createdQuiz = await createQuizApi(newQuiz);
-      setQuizItems(prevState => [...prevState, createdQuiz]);
-    } catch (error) {
-      console.log(error)
-    }
-  }
+//   // const addQuiz = async newQuiz => {
+//   //   // console.log(newQuiz)
+//   //   try {
+//   //     const createdQuiz = await createQuizApi(newQuiz);
+//   //     setQuizItems(prevState => [...prevState, createdQuiz]);
+//   //   } catch (error) {
+//   //     console.log(error)
+//   //   }
+//   // }
 
 //   const addQuiz = async newQuiz => {
 //     try {
-//         // Отримайте результат створення квіза
 //         const createdQuiz = await createQuizApi(newQuiz);
-//         // Перевірте, чи є відповідь від серверу та чи є ID у створеного квіза
-//         if (createdQuiz && createdQuiz.id) {
-//             setQuizItems(prevState => [...prevState, createdQuiz]);
-//         } else {
-//             console.error('Помилка під час створення квіза: невірна відповідь від серверу.');
-//         }
+//         console.log('Отримано відповідь від сервера:', createdQuiz);
+//         setQuizItems(prevState => [...prevState, createdQuiz]);
 //     } catch (error) {
-//         console.error('Помилка при створенні квіза:', error);
+//         console.error('Помилка при створенні тесту:', error);
 //     }
 // }
 
 
+// //   const addQuiz = async newQuiz => {
+// //     try {
+// //         // Отримайте результат створення квіза
+// //         const createdQuiz = await createQuizApi(newQuiz);
+// //         // Перевірте, чи є відповідь від серверу та чи є ID у створеного квіза
+// //         if (createdQuiz && createdQuiz.id) {
+// //             setQuizItems(prevState => [...prevState, createdQuiz]);
+// //         } else {
+// //             console.error('Помилка під час створення квіза: невірна відповідь від серверу.');
+// //         }
+// //     } catch (error) {
+// //         console.error('Помилка при створенні квіза:', error);
+// //     }
+// // }
+
+
+// //   const deleteQuiz = async quizId => {
+// //   try {
+// //     const deletedQuiz = await deleteQuizApi(quizId);
+// //     setQuizItems(prevState =>
+// //       prevState.filter(quiz => quiz.id !== deletedQuiz.id));
+// //   } catch (error) {
+// //     console.log(error)
+// //   }
+//   // }
+  
 //   const deleteQuiz = async quizId => {
 //   try {
 //     const deletedQuiz = await deleteQuizApi(quizId);
@@ -108,82 +129,90 @@ export const App = () => {
 //   } catch (error) {
 //     console.log(error)
 //   }
-  // }
-  
-  const deleteQuiz = async quizId => {
-  try {
-    const deletedQuiz = await deleteQuizApi(quizId);
-    setQuizItems(prevState =>
-      prevState.filter(quiz => quiz.id !== deletedQuiz.id));
-  } catch (error) {
-    console.log(error)
-  }
-}
+// }
 
+
+// //   const getVisibleQuizItem = () => {
+// //     const lowerCaseTopic = (filters.topic ?? '').toLowerCase();
+
+// //     return quizItems.filter(quiz => {
+// //         const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
+// //         const hasMatchingLevel = quiz.level === filters.level;
+// //         return filters.level === 'all' ? hasTopic : hasTopic && hasMatchingLevel;
+// //     });
+//   // };
 
 //   const getVisibleQuizItem = () => {
 //     const lowerCaseTopic = (filters.topic ?? '').toLowerCase();
-
-//     return quizItems.filter(quiz => {
-//         const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
-//         const hasMatchingLevel = quiz.level === filters.level;
-//         return filters.level === 'all' ? hasTopic : hasTopic && hasMatchingLevel;
-//     });
-  // };
-
-  const getVisibleQuizItem = () => {
-  const lowerCaseTopic = (filters.topic ?? '').toLowerCase();
-
-  return quizItems.filter(quiz => {
-    const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
-    const hasMatchingLevel = filters.level === 'all' || quiz.level === filters.level;
-    return hasTopic && hasMatchingLevel;
-  });
-};
+//     // console.log()   
+//   return quizItems.filter(quiz => {
+//     const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
+//     // console.log(hasTopic)
+//     const hasMatchingLevel = filters.level === 'all' ?? quiz.level === filters.level;
+//       // console.log(hasMatchingLevel)
+//     return hasTopic && hasMatchingLevel;
+//   });
+// };
 
 
-  const visibleQuizItem = getVisibleQuizItem();
+//   const visibleQuizItem = getVisibleQuizItem();
 
-  return (
-    <Layout>
-      <SearchBar onReset={resetFilters}>
-        <TopicFilter
-          value={filters.topic}
-          onChange={changeTopicFilter} />
-        
-        <LevelFilter
-          value={filters.level}
-          onChange={changeLevelFilter} />
-      </SearchBar>
-
-      <QuizForm onAdd={addQuiz}/>
-
-      {loading ? (
-        <div>LOADING...</div>
-      ) : (
-        <QuizList
-            items={visibleQuizItem}
-            onDelete={deleteQuiz} />)}
-    </Layout>
-  )
-}
-
-// import { Route, Routes } from 'react-router-dom';
-// import HomePage from './pages/HomePage';
-// import CreateQuizPage from './pages/CreateQuizPage';
-// import QuizzesPage from './pages/QuizzesPage';
-// import SingleQuizPage from './pages/SingleQuizPage';
-// import { AppLayout } from './AppLayout';
-
-// export const App = () => {
 //   return (
-//     <Routes>
-//       <Route path='/' element={<AppLayout />}>
-//         <Route index element={<HomePage />} />
-//         <Route path='/create' element={<CreateQuizPage />}/>
-//         <Route path='/quizzes' element={<QuizzesPage />}/>
-//         <Route path='/quizzes/:quizId' element={<SingleQuizPage />}/>
-//       </Route>
-//     </Routes>
-//   );
+//     <Layout>
+//       <SearchBar onReset={resetFilters}>
+//         <TopicFilter
+//           value={filters.topic}
+//           onChange={changeTopicFilter} />
+        
+//         <LevelFilter
+//           value={filters.level}
+//           onChange={changeLevelFilter} />
+//       </SearchBar>
+
+//       <QuizForm onAdd={addQuiz} />
+
+//       {loading ? (
+//         <div>LOADING...</div>
+//       ) : (
+//         <QuizList
+//             items={visibleQuizItem}
+//             onDelete={deleteQuiz} />)}
+//     </Layout>
+//   )
 // }
+
+import { Link, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import CreateQuizPage from './pages/CreateQuizPage';
+import QuizzesPage from './pages/QuizzesPage';
+import SingleQuizPage from './pages/SingleQuizPage';
+import { Layout } from './Layout';
+
+export const App = () => {
+  return (
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/" >Home</Link>
+          </li>
+          <li>
+            <Link to="/create">Create</Link>
+          </li>
+          <li>
+            <Link to="/quizzes">Quizzes</Link>
+          </li>
+        </ul>
+      </nav>
+  
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path='/create' element={<CreateQuizPage />} />
+          <Route path='/quizzes' element={<QuizzesPage />} />
+          <Route path='/quizzes/:quizId' element={<SingleQuizPage />} />
+        </Route>
+      </Routes>
+    </div>
+  );
+}

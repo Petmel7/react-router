@@ -14,6 +14,7 @@ export const deleteQuizApi = async quizId => {
 }
 
 export const createQuizApi = async newQuiz => {
+    console.log(newQuiz)
     const response = await axios.post('/quizzes', newQuiz);
     return response.data;
 }

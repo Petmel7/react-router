@@ -1,8 +1,9 @@
+
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import { StyledForm, StyledField, StyledError } from './QuizForm.styled';
 
-const schema = Yup.object().shape({
+const SignupSchema = Yup.object().shape({
     topic: Yup.string()
         .min(1, 'Too Short!')
         .required('Required'),
@@ -24,13 +25,14 @@ export const QuizForm = ({ onAdd }) => {
         <Formik
             initialValues={{
                 topic: '',
-                level: 'beginer',
+                level: 'beginner',
                 time: 0,
                 questions: 0,
             }}
-            validationSchema={schema}
+            // validationSchema={schema}
+            validationSchema={SignupSchema}
             onSubmit={(values, actions) => {
-                // console.log(values, actions)
+                console.log(values, actions)
                 onAdd(values)
                 actions.resetForm();
             }}
@@ -62,11 +64,11 @@ export const QuizForm = ({ onAdd }) => {
                     <StyledField name="questions" type="number"/>
                 </label>
 
-                <button type="submit">Submit</button>
+                    <button type="submit">Submit</button>
 
             </StyledForm>
 
-        </Formik>
+        </Formik>  
     )
 }
 
