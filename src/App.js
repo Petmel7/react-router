@@ -181,38 +181,23 @@
 //   )
 // }
 
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CreateQuizPage from './pages/CreateQuizPage';
 import QuizzesPage from './pages/QuizzesPage';
 import SingleQuizPage from './pages/SingleQuizPage';
-import { Layout } from './Layout';
+import { AppLayout } from './AppLayout';
+// import { Toaster } from 'react-hot-toast';
 
 export const App = () => {
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/" >Home</Link>
-          </li>
-          <li>
-            <Link to="/create">Create</Link>
-          </li>
-          <li>
-            <Link to="/quizzes">Quizzes</Link>
-          </li>
-        </ul>
-      </nav>
-  
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route path='/' element={<AppLayout/>}>
           <Route index element={<HomePage />} />
-          <Route path='/create' element={<CreateQuizPage />} />
-          <Route path='/quizzes' element={<QuizzesPage />} />
-          <Route path='/quizzes/:quizId' element={<SingleQuizPage />} />
+          <Route path="create" element={<CreateQuizPage />} />
+          <Route path="quizzes" element={<QuizzesPage />} />
+          <Route path="quizzes/:quizId" element={<SingleQuizPage />} />
         </Route>
       </Routes>
-    </div>
   );
 }

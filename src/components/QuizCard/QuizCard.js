@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Topic, Wrapper, Text } from './QuizCard.styled';
 import Modal from 'react-modal';
+import { Link } from "react-router-dom";
 
 const customStyles = {
     content: {
@@ -20,7 +21,9 @@ export const QuizCard = ({ item: { id, topic, level, time, questions }, onDelete
 
     return (
         <Wrapper>
-            <Topic onClick={() => setIsModalOpen(true)}>{topic}</Topic>
+            <Link to={`/quizzes/${id}`}>
+                <Topic>{topic}</Topic>
+            </Link>
             <Text>
                 <b>Level:</b>{level}
             </Text>

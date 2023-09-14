@@ -1,10 +1,15 @@
 
 import axios from "axios";
 
-axios.defaults.baseURL = 'https://6500928118c34dee0cd51f80.mockapi.io';
+axios.defaults.baseURL = 'https://650312faa0f2c1f3faeb62c4.mockapi.io';
 
 export const fetchQuizzes = async () => {
     const response = await axios.get('/quizzes');
+    return response.data;
+}
+
+export const fetchQuizzesById = async quizId => {
+    const response = await axios.get(`/quizzes/${quizId}`);
     return response.data;
 }
 

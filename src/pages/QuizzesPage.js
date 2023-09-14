@@ -51,12 +51,14 @@ import { TopicFilter } from '../TopicFilter';
 
 import { QuizList } from '../components/QuizList/QuizList';
 import { SearchBar } from '../components/SearchBar/SearchBar';
-import { Layout } from '../Layout';
-import { QuizForm } from '../components/QuizForm/QuizForm';
+// import { AppLayout } from '../AppLayout';
+// import { QuizForm } from '../components/QuizForm/QuizForm';
 import { LevelFilter } from '../LevelFilter';
 // import { TopicFilter } from './TopicFilter';
 import { createQuizApi, deleteQuizApi, fetchQuizzes } from '../Api';
 // import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+// import { Container } from '../AppLayout';
 
 const localStorageKey = 'quiz-filters';
 
@@ -124,15 +126,15 @@ export const QuizzesPage = () => {
         }));
     };
 
-    const addQuiz = async newQuiz => {
-        try {
-            const createdQuiz = await createQuizApi(newQuiz);
-            console.log('Отримано відповідь від сервера:', createdQuiz);
-            setQuizItems(prevState => [...prevState, createdQuiz]);
-        } catch (error) {
-            console.error('Помилка при створенні тесту:', error);
-        }
-    };
+    // const addQuiz = async newQuiz => {
+    //     try {
+    //         const createdQuiz = await createQuizApi(newQuiz);
+    //         console.log('Отримано відповідь від сервера:', createdQuiz);
+    //         setQuizItems(prevState => [...prevState, createdQuiz]);
+    //     } catch (error) {
+    //         console.error('Помилка при створенні тесту:', error);
+    //     }
+    // };
 
     const deleteQuiz = async quizId => {
         try {
@@ -160,7 +162,7 @@ export const QuizzesPage = () => {
     const visibleQuizItem = getVisibleQuizItem();
 
     return (
-        <Layout>
+        <>
             <SearchBar onReset={resetFilters}>
                 <TopicFilter
                     value={filters.topic}
@@ -171,7 +173,11 @@ export const QuizzesPage = () => {
                     onChange={changeLevelFilter} />
             </SearchBar>
 
-            <QuizForm onAdd={addQuiz} />
+            {/* <QuizForm onAdd={addQuiz} /> */}
+
+            <div>
+                <Link to="/create">Create</Link>
+            </div>
 
             {loading ? (
                 <div>LOADING...</div>
@@ -179,7 +185,7 @@ export const QuizzesPage = () => {
                 <QuizList
                     items={visibleQuizItem}
                     onDelete={deleteQuiz} />)}
-        </Layout>
+        </>
     );
 };
 
