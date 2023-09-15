@@ -1,10 +1,20 @@
 import { Wrapper } from './SearchBar.styled';
+import { useSearchParams } from "react-router-dom";
 
-export const SearchBar = ({ onReset, children }) => {
+export const SearchBar = ({ children }) => {
+    const [, setSearchParams] = useSearchParams();
+
+const resetFilters = () => {
+    setSearchParams({
+        topic: '',
+        level: 'all',
+        });
+    };
+
     return (
         <Wrapper>
             {children}
-            <button onClick={onReset}>Reset Filters</button>
+            <button onClick={resetFilters}>Reset Filters</button>
         </Wrapper>
     )
 }
