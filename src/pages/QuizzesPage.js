@@ -1,22 +1,20 @@
-import { useSearchParams } from "react-router-dom";
+
 import { useEffect, useState } from 'react';
 import { TopicFilter } from '../TopicFilter';
-
 import { QuizList } from '../components/QuizList/QuizList';
 import { SearchBar } from '../components/SearchBar/SearchBar';
-// import { AppLayout } from '../AppLayout';
-// import { QuizForm } from '../components/QuizForm/QuizForm';
 import { LevelFilter } from '../LevelFilter';
-// import { TopicFilter } from '../TopicFilter';
 import { fetchQuizzes, deleteQuizApi } from '../Api';
-// import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useQueryParams } from '../hoocks/useQueryParams';
 
 export const QuizzesPage = () => {
-    const [searchParams] = useSearchParams();
-    const topicFilter = searchParams.get('topic') ?? '';
-    const levelFilter = searchParams.get('level') ?? 'all';
-    console.log(topicFilter, levelFilter);
+    const { topic, level } = useQueryParams();
+
+    console.log(
+        'Спрацював topicFilter', topic,
+        'Спрацював levelFilter', level
+    );
 
     const [quizItems, setQuizItems] = useState([]);
     const [loading, setLoading] = useState(false)
@@ -47,17 +45,13 @@ export const QuizzesPage = () => {
     };
 
     const getVisibleQuizItem = () => {
-        const lowerCaseTopic = (topicFilter ?? '').toLowerCase();
-        // console.log()   
+        const lowerCaseTopic = (topic ?? '').toLowerCase(); 
         return quizItems.filter(quiz => {
             const hasTopic = (quiz.topic ?? '').toLowerCase().includes(lowerCaseTopic);
-            // console.log(hasTopic)
-            const hasMatchingLevel = levelFilter === 'all' ?? quiz.level === levelFilter;
-            // console.log(hasMatchingLevel)
+            const hasMatchingLevel = level === 'all' ?? quiz.level === level;
             return hasTopic && hasMatchingLevel;
         });
     };
-
 
     const visibleQuizItem = getVisibleQuizItem();
 

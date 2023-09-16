@@ -1,29 +1,19 @@
-// export const TopicFilter = ({ value, onChange }) => {
-//     return (
-//         <input
-//             type="text"
-//             value={value}
-//             onChange={evt => onChange(evt.target.value)} />
-//     )
-// }
 
 import { useSearchParams } from "react-router-dom";
+import { useQueryParams } from "./hoocks/useQueryParams";
 
 export const TopicFilter = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const topic = searchParams.get('topic') ?? '';
+    const { topic, level } = useQueryParams();
+    const [, setSearchParams] = useSearchParams();
 
     const changeFilter = evt => {
-        setSearchParams({
-            topic: evt.target.value,
-            level: searchParams.get('level'),
-        })
-    }
+        setSearchParams({ topic: evt.target.value, level });
+    };
 
     return (
         <input
             type="text"
             value={topic}
             onChange={changeFilter} />
-    )
-}
+    );
+};

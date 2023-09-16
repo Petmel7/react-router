@@ -21,7 +21,9 @@ const CreateQuizPage = () => {
     return (
         <div>
             <div>
-                <Link to="/quizzes"><AiOutlineArrowLeft/>Повернутися до quizzes</Link>
+                <Link to="/quizzes">
+                    <AiOutlineArrowLeft />Повернутися до quizzes
+                </Link>
             </div>
             <QuizForm onAdd={addQuiz} />
         </div>
