@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Topic, Wrapper, Text } from './QuizCard.styled';
 import Modal from 'react-modal';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const customStyles = {
     content: {
@@ -16,12 +16,14 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-export const QuizCard = ({ item: { id, topic, level, time, questions }, onDelete }) => {
+export const QuizCard = ({ item:
+    { id, topic, level, time, questions }, onDelete }) => {
+    const location = useLocation();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <Wrapper>
-            <Link to={`/quizzes/${id}`}>
+            <Link to={`/quizzes/${id}`} state={{from: location}}>
                 <Topic>{topic}</Topic>
             </Link>
             <Text>
