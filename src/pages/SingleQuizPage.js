@@ -15,6 +15,7 @@ const SingleQuizPage = () => {
             try {
                 const fetchdQuiz = await fetchQuizzesById(quizId)
                 setQuiz(fetchdQuiz)
+                toast.success('УСПІШНО', fetchdQuiz)
             } catch (error) {
                 toast.error('ПОМИЛКА', error);
             }
