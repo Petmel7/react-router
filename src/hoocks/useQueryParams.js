@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 
 export const useQueryParams = () => {
     const [searchParams, setSearchParams] = useSearchParams();
+    console.log('TopicSearchParams', searchParams)
     const topic = searchParams.get('topic') ?? '';
     const level = searchParams.get('level') ?? '';
     console.log('LEVEL', level)
