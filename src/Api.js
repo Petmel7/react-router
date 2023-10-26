@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-axios.defaults.baseURL = 'https://650312faa0f2c1f3faeb62c4.mockapi.io';
+axios.defaults.baseURL = 'https://6523b284ea560a22a4e8b180.mockapi.io';
 
 export const fetchQuizzes = async () => {
     const response = await axios.get('/quizzes');
